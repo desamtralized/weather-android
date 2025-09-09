@@ -1,15 +1,14 @@
 package com.recurly.weatherui.data.repository
 
 import com.recurly.weatherui.data.mapper.WeatherDataMapper
-import com.recurly.weatherui.data.models.Temperature
+import com.recurly.weatherui.data.models.CurrentWeather
 import com.recurly.weatherui.data.network.api.WeatherApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class WeatherRepositoryImpl @Inject constructor(
-    private val weatherApi: WeatherApi,
-    private val mapper: WeatherDataMapper
+    private val weatherApi: WeatherApi, private val mapper: WeatherDataMapper
 ) : WeatherRepository {
 
     companion object {
@@ -17,7 +16,7 @@ class WeatherRepositoryImpl @Inject constructor(
         private const val DEFAULT_LON = -121.8434
     }
 
-    override suspend fun getCurrentTemperature(): Result<Temperature> {
+    override suspend fun getCurrentWeather(): Result<CurrentWeather> {
         return try {
             // Step 1: Get points data
             val pointsResponse = weatherApi.getPoints(DEFAULT_LAT, DEFAULT_LON)
@@ -29,9 +28,13 @@ class WeatherRepositoryImpl @Inject constructor(
             // Step 3: Extract today's temperature
             val todayPeriod = forecastResponse.properties.periods.firstOrNull()
                 ?: throw Exception("No forecast data available")
-
+            val relativeLocation = pointsResponse.properties.relativeLocation
+            val locationString = relativeLocation?.let {
+                "${it.properties.city}, ${it.properties.state}"
+            } ?: ""
+            val description = todayPeriod.shortForecast
             Result.success(
-                mapper.mapToTemperature(todayPeriod)
+                mapper.mapToCurrentWeather(todayPeriod, locationString, description)
             )
         } catch (e: Exception) {
             Result.failure(e)

@@ -1,7 +1,7 @@
 package com.recurly.weatherui.data.repository
 
-import com.recurly.weatherui.data.models.Temperature
+import com.recurly.weatherui.data.models.CurrentWeather
 
 interface WeatherRepository {
-    suspend fun getCurrentTemperature(): Result<Temperature>
+    suspend fun getCurrentWeather(): Result<CurrentWeather>
 }

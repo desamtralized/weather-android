@@ -1,16 +1,26 @@
 package com.recurly.weatherui.data
 
 import com.recurly.weatherui.data.mapper.WeatherDataMapper
-import com.recurly.weatherui.data.models.*
+import com.recurly.weatherui.data.models.CurrentWeather
+import com.recurly.weatherui.data.models.ForecastPeriod
+import com.recurly.weatherui.data.models.ForecastProperties
+import com.recurly.weatherui.data.models.ForecastResponse
+import com.recurly.weatherui.data.models.PointsProperties
+import com.recurly.weatherui.data.models.PointsResponse
 import com.recurly.weatherui.data.network.api.WeatherApi
-import com.recurly.weatherui.data.utils.TemperatureUnit
 import com.recurly.weatherui.data.repository.WeatherRepository
 import com.recurly.weatherui.data.repository.WeatherRepositoryImpl
-import io.mockk.*
+import com.recurly.weatherui.data.utils.TemperatureUnit
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -57,22 +67,22 @@ class WeatherRepositoryTest {
                 periods = listOf(mockForecastPeriod)
             )
         )
-        val expectedTemperature = Temperature(72, TemperatureUnit.FAHRENHEIT, "San Jose, CA")
+        val expectedTemperature = CurrentWeather(72, TemperatureUnit.FAHRENHEIT, "San Jose, CA")
 
         coEvery { weatherApi.getPoints(any(), any()) } returns mockPointsResponse
         coEvery { weatherApi.getForecast(any()) } returns mockForecastResponse
-        every { mapper.mapToTemperature(any()) } returns expectedTemperature
+        every { mapper.mapToCurrentWeather(any()) } returns expectedTemperature
 
         // When
-        val result = repository.getCurrentTemperature()
+        val result = repository.getCurrentWeather()
 
         // Then
         assertTrue(result.isSuccess)
         assertEquals(expectedTemperature, result.getOrNull())
-        
+
         coVerify { weatherApi.getPoints(37.2883, -121.8434) }
         coVerify { weatherApi.getForecast("https://api.weather.gov/forecast/1") }
-        verify { mapper.mapToTemperature(mockForecastPeriod) }
+        verify { mapper.mapToCurrentWeather(mockForecastPeriod) }
     }
 
     @Test
@@ -82,7 +92,7 @@ class WeatherRepositoryTest {
         coEvery { weatherApi.getPoints(any(), any()) } throws exception
 
         // When
-        val result = repository.getCurrentTemperature()
+        val result = repository.getCurrentWeather()
 
         // Then
         assertTrue(result.isFailure)
@@ -109,7 +119,7 @@ class WeatherRepositoryTest {
         coEvery { weatherApi.getForecast(any()) } returns mockForecastResponse
 
         // When
-        val result = repository.getCurrentTemperature()
+        val result = repository.getCurrentWeather()
 
         // Then
         assertTrue(result.isFailure)
