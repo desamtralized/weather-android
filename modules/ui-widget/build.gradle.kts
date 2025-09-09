@@ -13,7 +13,7 @@ android {
     defaultConfig {
         minSdk = AndroidConfig.minSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.recurly.weatherui.uiwidget.ComposeTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -80,6 +80,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.compose.activity)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.compiler)
 
     // Debug
     debugImplementation(libs.compose.ui.tooling)
