@@ -1,0 +1,220 @@
+INITAL.md
+PRPs/*
+.claude/
+CLAUDE.md
+
+# Dependencies
+node_modules/
+bower_components/
+jspm_packages/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+out/
+*.bundle.js
+*.bundle.js.map
+*.min.js
+*.min.css
+
+# Testing
+coverage/
+*.lcov
+.nyc_output/
+test-results/
+*.test.js
+*.spec.js
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.sublime-project
+*.sublime-workspace
+.settings/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+.vscode-test/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+*.egg-info/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/test/tmp/
+/test/version_tmp/
+/tmp/
+.bundle/
+.rvmrc
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+target/
+
+# C/C++
+*.o
+*.obj
+*.elf
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.dSYM/
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+
+# Go
+*.exe
+*.test
+*.prof
+vendor/
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Docker
+.dockerignore
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Backup files
+*.bak
+*.backup
+*~
+*.orig
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Other
+.eslintcache
+.stylelintcache
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+typings/
+.grunt/
+.lock-wscript
+node_modules.tar.gz
+.npm/
+.node_repl_history
+*.tsbuildinfo
+.eslintrc.json
+.prettierrc
+.editorconfig
