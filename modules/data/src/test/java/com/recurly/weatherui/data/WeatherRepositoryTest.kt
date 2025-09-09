@@ -3,6 +3,7 @@ package com.recurly.weatherui.data
 import com.recurly.weatherui.data.mapper.WeatherDataMapper
 import com.recurly.weatherui.data.models.*
 import com.recurly.weatherui.data.network.api.WeatherApi
+import com.recurly.weatherui.data.utils.TemperatureUnit
 import com.recurly.weatherui.data.repository.WeatherRepository
 import com.recurly.weatherui.data.repository.WeatherRepositoryImpl
 import io.mockk.*
@@ -56,7 +57,7 @@ class WeatherRepositoryTest {
                 periods = listOf(mockForecastPeriod)
             )
         )
-        val expectedTemperature = Temperature(72, "F", "San Jose, CA")
+        val expectedTemperature = Temperature(72, TemperatureUnit.FAHRENHEIT, "San Jose, CA")
 
         coEvery { weatherApi.getPoints(any(), any()) } returns mockPointsResponse
         coEvery { weatherApi.getForecast(any()) } returns mockForecastResponse

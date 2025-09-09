@@ -1,55 +1,40 @@
 package com.recurly.weatherui
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.view.WindowCompat
+import com.recurly.weatherui.navigation.WeatherNavigation
 import com.recurly.weatherui.ui.theme.WeatherUITheme
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+open class MainActivity : ComponentActivity() {
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
         enableEdgeToEdge()
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+        
         setContent {
             WeatherUITheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    WeatherScreen(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    WeatherNavigation()
                 }
             }
         }
     }
-}
-
-@Composable
-fun WeatherScreen(modifier: Modifier = Modifier) {
-    Surface(
-        modifier = modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Text(
-            text = "Weather UI",
-            style = MaterialTheme.typography.headlineMedium
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun WeatherScreenPreview() {
-    WeatherUITheme {
-        WeatherScreen()
+    
+    protected open fun enableEdgeToEdge() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 }

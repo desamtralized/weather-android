@@ -33,6 +33,17 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 # Lifecycle
 lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+# Navigation
+navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.8.0" }
+
+# TV Compose
+tv-foundation = { module = "androidx.tv:tv-foundation", version = "1.0.0-alpha11" }
+tv-material = { module = "androidx.tv:tv-material", version = "1.0.0-alpha03" }
+
+# Accompanist
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version = "0.32.0" }
 
 # Networking
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -60,6 +71,7 @@ androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", vers
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 mockk = { module = "io.mockk:mockk", version = "1.13.11" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version = "2.2.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

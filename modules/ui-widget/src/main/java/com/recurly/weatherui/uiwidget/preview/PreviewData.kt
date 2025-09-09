@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.recurly.weatherui.uiwidget.components.TemperatureWidget
 import com.recurly.weatherui.uiwidget.state.TemperatureUiState
 import com.recurly.weatherui.uiwidget.theme.WeatherUITheme
+import com.recurly.weatherui.data.utils.TemperatureUnit
 
 @Preview(name = "Phone Portrait", device = Devices.PHONE)
 @Preview(name = "Phone Landscape", device = "spec:width=891dp,height=411dp")
@@ -20,7 +21,7 @@ fun TemperatureWidgetSuccessPreview() {
             TemperatureWidget(
                 state = TemperatureUiState.Success(
                     temperature = 72,
-                    unit = "F",
+                    unit = TemperatureUnit.FAHRENHEIT,
                     location = "San Jose, CA",
                     lastUpdated = "2:45 PM",
                     description = "Partly Cloudy"
@@ -81,7 +82,7 @@ fun TemperatureWidgetHighTempPreview() {
             TemperatureWidget(
                 state = TemperatureUiState.Success(
                     temperature = 105,
-                    unit = "F",
+                    unit = TemperatureUnit.FAHRENHEIT,
                     location = "Phoenix, AZ",
                     lastUpdated = "3:30 PM",
                     description = "Sunny"
@@ -99,7 +100,7 @@ fun TemperatureWidgetLowTempPreview() {
             TemperatureWidget(
                 state = TemperatureUiState.Success(
                     temperature = -15,
-                    unit = "F",
+                    unit = TemperatureUnit.FAHRENHEIT,
                     location = "Minneapolis, MN",
                     lastUpdated = "8:00 AM",
                     description = "Snow"
@@ -117,7 +118,7 @@ fun TemperatureWidgetCelsiusPreview() {
             TemperatureWidget(
                 state = TemperatureUiState.Success(
                     temperature = 22,
-                    unit = "C",
+                    unit = TemperatureUnit.CELSIUS,
                     location = "London, UK",
                     lastUpdated = "14:45",
                     description = "Overcast"
