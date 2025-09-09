@@ -40,7 +40,8 @@ class WeatherViewModel @Inject constructor(
                         unit = currentWeather.unit,
                         location = currentWeather.location,
                         lastUpdated = getCurrentTime(),
-                        description = currentWeather.description
+                        description = currentWeather.description,
+                        startTime = currentWeather.startTime
                     )
                 }
                 .onFailure { exception ->

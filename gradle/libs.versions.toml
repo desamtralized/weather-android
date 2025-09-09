@@ -8,6 +8,7 @@ retrofit = "2.11.0"
 ktor = "3.1.1"
 coroutines = "1.8.1"
 compose-compiler = "1.5.15"
+lottie-compose = "6.5.2"
 
 [libraries]
 # Compose
@@ -45,6 +46,9 @@ tv-material = { module = "androidx.tv:tv-material", version = "1.0.0-alpha03" }
 
 # Accompanist
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version = "0.32.0" }
+
+# Lottie
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
 
 # Networking
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }

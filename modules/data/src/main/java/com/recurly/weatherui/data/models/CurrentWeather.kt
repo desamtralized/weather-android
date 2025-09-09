@@ -6,5 +6,6 @@ data class CurrentWeather(
     val temperature: Int,
     val unit: TemperatureUnit,
     val location: String = "Location Undefined",
-    val description: String = "Description Undefined"
+    val description: String = "Description Undefined",
+    val startTime: String? = null
 )

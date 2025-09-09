@@ -10,7 +10,8 @@ sealed interface TemperatureUiState {
         val unit: TemperatureUnit,
         val location: String,
         val lastUpdated: String,
-        val description: String? = null
+        val description: String? = null,
+        val startTime: String? = null
     ) : TemperatureUiState
     
     data class Error(

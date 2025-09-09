@@ -17,6 +17,8 @@ data class ForecastPeriod(
     val number: Int,
     @SerializedName("name")
     val name: String,
+    @SerializedName("startTime")
+    val startTime: String?,
     @SerializedName("temperature")
     val temperature: Int,
     @SerializedName("temperatureUnit")

@@ -22,7 +22,8 @@ class WeatherDataMapper @Inject constructor() {
                 else -> TemperatureUnit.FAHRENHEIT // Default to Fahrenheit
             },
             location,
-            description
+            description,
+            startTime = period.startTime
         )
     }
 }

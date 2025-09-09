@@ -1,6 +1,7 @@
 package com.recurly.weatherui.uiwidget.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.recurly.weatherui.uiwidget.state.TemperatureUiState
+import com.recurly.weatherui.uiwidget.weather.WeatherParser
 
 @Composable
 fun PhonePortraitTemperatureCard(
@@ -43,11 +45,18 @@ fun PhonePortraitTemperatureCard(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            //Placeholder for Lottie Animation
-            AnimatedTemperatureText(
-                temperature = state.temperature,
-                unit = state.unit
-            )
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                WeatherAnimation(
+                    weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                    size = 100.dp
+                )
+                AnimatedTemperatureText(
+                    temperature = state.temperature,
+                    unit = state.unit
+                )
+            }
 
             Column(
                 modifier = Modifier
@@ -123,11 +132,19 @@ fun PhoneLandscapeTemperatureCard(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(1.5f)
             ) {
-                AnimatedTemperatureText(
-                    temperature = state.temperature,
-                    unit = state.unit,
-                    textSize = 56.sp
-                )
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    WeatherAnimation(
+                        weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                        size = 100.dp
+                    )
+                    AnimatedTemperatureText(
+                        temperature = state.temperature,
+                        unit = state.unit,
+                        textSize = 56.sp
+                    )
+                }
                 state.description?.let {
                     Text(
                         text = it,
@@ -172,20 +189,19 @@ fun TabletPortraitTemperatureCard(
                 .padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Thermostat,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            AnimatedTemperatureText(
-                temperature = state.temperature,
-                unit = state.unit,
-                textSize = 96.sp
-            )
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                WeatherAnimation(
+                    weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                    size = 200.dp
+                )
+                AnimatedTemperatureText(
+                    temperature = state.temperature,
+                    unit = state.unit,
+                    textSize = 96.sp
+                )
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -263,11 +279,19 @@ fun TabletLandscapeTemperatureCard(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(1.5f)
             ) {
-                AnimatedTemperatureText(
-                    temperature = state.temperature,
-                    unit = state.unit,
-                    textSize = 96.sp
-                )
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    WeatherAnimation(
+                        weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                        size = 180.dp
+                    )
+                    AnimatedTemperatureText(
+                        temperature = state.temperature,
+                        unit = state.unit,
+                        textSize = 96.sp
+                    )
+                }
                 state.description?.let {
                     Text(
                         text = it,

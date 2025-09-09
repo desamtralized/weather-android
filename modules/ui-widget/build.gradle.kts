@@ -58,6 +58,7 @@ dependencies {
     
     // Animation
     implementation(libs.compose.animation)
+    implementation(libs.lottie.compose)
     
     // Icons
     implementation(libs.compose.material.icons.extended)
