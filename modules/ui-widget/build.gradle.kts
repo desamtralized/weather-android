@@ -62,6 +62,9 @@ dependencies {
     
     // Icons
     implementation(libs.compose.material.icons.extended)
+    
+    // Image Loading
+    implementation(libs.coil.compose)
 
     // Hilt
     implementation(libs.hilt.android)

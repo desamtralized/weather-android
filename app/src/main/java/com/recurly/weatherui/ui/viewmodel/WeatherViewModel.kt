@@ -41,7 +41,9 @@ class WeatherViewModel @Inject constructor(
                         location = currentWeather.location,
                         lastUpdated = getCurrentTime(),
                         description = currentWeather.description,
-                        startTime = currentWeather.startTime
+                        startTime = currentWeather.startTime,
+                        latitude = currentWeather.latitude,
+                        longitude = currentWeather.longitude
                     )
                 }
                 .onFailure { exception ->

@@ -44,7 +44,7 @@ android {
             dimension = "platform"
             applicationIdSuffix = ".google"
             versionNameSuffix = "-google"
-            
+
             manifestPlaceholders["appLabel"] = "@string/app_name_google"
             buildConfigField("String", "PLATFORM", "\"GOOGLE\"")
         }
@@ -52,12 +52,10 @@ android {
             dimension = "platform"
             applicationIdSuffix = ".firetv"
             versionNameSuffix = "-firetv"
-            
+
             manifestPlaceholders["appLabel"] = "@string/app_name_firetv"
             buildConfigField("String", "PLATFORM", "\"FIRETV\"")
-            
-            // FireTV specific configurations
-            minSdk = 24  // Aligned with ui-widget module requirements
+
         }
     }
 
@@ -101,7 +99,7 @@ dependencies {
 
     // Navigation
     implementation(libs.navigation.compose)
-    
+
     // Accompanist
     implementation(libs.accompanist.swiperefresh)
 

@@ -50,6 +50,9 @@ accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiper
 # Lottie
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
 
+# Image Loading
+coil-compose = { module = "io.coil-kt:coil-compose", version = "2.6.0" }
+
 # Networking
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }

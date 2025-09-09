@@ -12,7 +12,9 @@ class WeatherDataMapper @Inject constructor() {
     fun mapToCurrentWeather(
         period: ForecastPeriod,
         location: String = "",
-        description: String = ""
+        description: String = "",
+        latitude: Double,
+        longitude: Double
     ): CurrentWeather {
         return CurrentWeather(
             temperature = period.temperature,
@@ -23,7 +25,9 @@ class WeatherDataMapper @Inject constructor() {
             },
             location,
             description,
-            startTime = period.startTime
+            startTime = period.startTime,
+            latitude = latitude,
+            longitude = longitude
         )
     }
 }

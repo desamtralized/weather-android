@@ -45,7 +45,7 @@ object WeatherParser {
         }
     }
     
-    private fun isNightTime(startTime: String?): Boolean {
+    fun isNightTime(startTime: String?): Boolean {
         if (startTime == null) return false
         
         return try {

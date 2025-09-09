@@ -22,8 +22,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.recurly.weatherui.ui.viewmodel.WeatherViewModel
 import com.recurly.weatherui.uiwidget.components.TemperatureWidget
 import com.recurly.weatherui.uiwidget.state.TemperatureUiState
@@ -61,16 +59,11 @@ fun WeatherScreen(
                     onRetry = { viewModel.loadWeatherData() }
                 )
             } else {
-                SwipeRefresh(
-                    state = rememberSwipeRefreshState(isRefreshing),
-                    onRefresh = { viewModel.refresh() }
-                ) {
-                    TemperatureWidget(
-                        state = uiState,
-                        onRetry = { viewModel.loadWeatherData() },
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
+                TemperatureWidget(
+                    state = uiState,
+                    onRetry = { viewModel.loadWeatherData() },
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }

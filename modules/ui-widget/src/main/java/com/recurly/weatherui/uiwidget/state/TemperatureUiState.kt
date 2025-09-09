@@ -11,7 +11,9 @@ sealed interface TemperatureUiState {
         val location: String,
         val lastUpdated: String,
         val description: String? = null,
-        val startTime: String? = null
+        val startTime: String? = null,
+        val latitude: Double = 0.0,
+        val longitude: Double = 0.0
     ) : TemperatureUiState
     
     data class Error(

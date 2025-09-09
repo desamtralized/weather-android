@@ -15,11 +15,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Shadow
 import com.recurly.weatherui.data.utils.TemperatureUnit
 import com.recurly.weatherui.data.utils.TemperatureUtils
 
@@ -65,14 +70,24 @@ fun AnimatedTemperatureText(
             text = "$animatedTemperature", style = TextStyle(
                 fontSize = textSize,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                shadow = Shadow(
+                    color = Color.Black.copy(alpha = 0.3f),
+                    offset = Offset(2f, 2f),
+                    blurRadius = 4f
+                )
             )
         )
         Text(
             text = "°${currentUnit.symbol}", style = TextStyle(
                 fontSize = textSize * 0.5f,
                 fontWeight = FontWeight.Normal,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                shadow = Shadow(
+                    color = Color.Black.copy(alpha = 0.3f),
+                    offset = Offset(1f, 1f),
+                    blurRadius = 2f
+                )
             ), modifier = Modifier.padding(top = 8.dp)
         )
     }
