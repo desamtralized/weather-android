@@ -4,6 +4,10 @@ import com.recurly.weatherui.uiwidget.R
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * Weather condition types with associated Lottie animations.
+ * @property animationRes Resource ID for weather animation
+ */
 enum class WeatherType(val animationRes: Int) {
     CLEAR_DAY(R.raw.clear_day),
     CLEAR_NIGHT(R.raw.clear_night),
@@ -13,7 +17,14 @@ enum class WeatherType(val animationRes: Int) {
     STORM(R.raw.storm)
 }
 
+/** Parses weather descriptions into animation types */
 object WeatherParser {
+    /**
+     * Maps forecast text to appropriate weather animation.
+     * @param shortForecast Weather description from API
+     * @param startTime ISO timestamp for day/night detection
+     * @return Matching weather type with time-appropriate variant
+     */
     fun parseWeather(shortForecast: String?, startTime: String?): WeatherType {
         if (shortForecast == null) return getDefaultWeatherForTime(startTime)
         
@@ -45,6 +56,7 @@ object WeatherParser {
         }
     }
     
+    /** Determines if timestamp represents nighttime hours (8pm-6am) */
     fun isNightTime(startTime: String?): Boolean {
         if (startTime == null) return false
         
@@ -57,6 +69,7 @@ object WeatherParser {
         }
     }
     
+    /** Provides time-appropriate default weather animation */
     private fun getDefaultWeatherForTime(startTime: String?): WeatherType {
         return if (isNightTime(startTime)) WeatherType.CLEAR_NIGHT else WeatherType.CLEAR_DAY
     }

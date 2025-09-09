@@ -14,21 +14,28 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
+/**
+ * Manages weather data fetching and UI state coordination.
+ * Handles automatic refresh on initialization and manual refresh.
+ */
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<TemperatureUiState>(TemperatureUiState.Loading)
+    /** Observable weather UI state for Compose consumption */
     val uiState: StateFlow<TemperatureUiState> = _uiState.asStateFlow()
 
     private val _isRefreshing = MutableStateFlow(false)
+    /** Refresh indicator state */
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     init {
         loadWeatherData()
     }
 
+    /** Fetches current weather from repository and updates UI state */
     fun loadWeatherData() {
         viewModelScope.launch {
             _uiState.value = TemperatureUiState.Loading
@@ -57,6 +64,7 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
+    /** Triggers manual refresh with loading indicator */
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
@@ -64,6 +72,7 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
+    /** Formats current time for "last updated" display */
     private fun getCurrentTime(): String {
         val formatter = SimpleDateFormat("h:mm a", Locale.getDefault())
         return formatter.format(Date())

@@ -7,6 +7,10 @@ import com.recurly.weatherui.data.utils.WeatherConstants
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Implementation of WeatherRepository using Weather.gov API.
+ * Handles two-step API flow: points lookup then forecast retrieval.
+ */
 @Singleton
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi, private val mapper: WeatherDataMapper
@@ -14,14 +18,14 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getCurrentWeather(): Result<CurrentWeather> {
         return try {
-            // Step 1: Get points data
+            // Get points data for location metadata
             val pointsResponse = weatherApi.getPoints(WeatherConstants.DEFAULT_LATITUDE, WeatherConstants.DEFAULT_LONGITUDE)
 
-            // Step 2: Get forecast using the forecast URL
+            // Fetch forecast using dynamic URL from points
             val forecastUrl = pointsResponse.properties.forecast
             val forecastResponse = weatherApi.getForecast(forecastUrl)
 
-            // Step 3: Extract today's temperature
+            // Extract first period (current conditions)
             val todayPeriod = forecastResponse.properties.periods.firstOrNull()
                 ?: throw Exception("No forecast data available")
             val relativeLocation = pointsResponse.properties.relativeLocation

@@ -25,6 +25,12 @@ import com.recurly.weatherui.uiwidget.state.TemperatureUiState
 import com.recurly.weatherui.uiwidget.utils.MapboxUtils
 import com.recurly.weatherui.uiwidget.weather.WeatherParser
 
+/**
+ * Phone portrait layout for temperature display.
+ * Shows weather data with map background and gradient overlay.
+ * @param state Success state containing weather data
+ * @param modifier Optional modifier for customization
+ */
 @Composable
 fun PhonePortraitTemperatureCard(
     state: TemperatureUiState.Success,
@@ -140,6 +146,12 @@ fun PhonePortraitTemperatureCard(
     }
 }
 
+/**
+ * Phone landscape layout for temperature display.
+ * Optimized horizontal layout with side-by-side content arrangement.
+ * @param state Success state containing weather data
+ * @param modifier Optional modifier for customization
+ */
 @Composable
 fun PhoneLandscapeTemperatureCard(
     state: TemperatureUiState.Success,
@@ -270,6 +282,12 @@ fun PhoneLandscapeTemperatureCard(
     }
 }
 
+/**
+ * Tablet portrait layout for temperature display.
+ * Enhanced layout with weather animations and larger typography.
+ * @param state Success state containing weather data
+ * @param modifier Optional modifier for customization
+ */
 @Composable
 fun TabletPortraitTemperatureCard(
     state: TemperatureUiState.Success,
