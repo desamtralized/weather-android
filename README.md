@@ -62,7 +62,8 @@ weatherui/
 
 ## Configuration
 
-Weather data requires valid coordinates. The app uses Weather.gov API which is free and requires no API key.
+Weather data requires valid coordinates. The app uses Weather.gov API which is free and requires no
+API key.
 
 ## Development
 
@@ -76,7 +77,3 @@ Weather data requires valid coordinates. The app uses Weather.gov API which is f
 # Generate release bundle
 ./gradlew bundleRelease
 ```
-
-## License
-
-[License information here]
