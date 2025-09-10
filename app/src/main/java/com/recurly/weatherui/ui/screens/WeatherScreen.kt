@@ -24,7 +24,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.recurly.weatherui.ui.viewmodel.WeatherViewModel
 import com.recurly.weatherui.uiwidget.components.TemperatureWidget
-import com.recurly.weatherui.uiwidget.state.TemperatureUiState
 
 @Composable
 fun WeatherScreen(
@@ -33,10 +32,10 @@ fun WeatherScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    
+
     // Determine if running on TV
     val isTV = context.packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
-    
+
     Scaffold(
         topBar = {
             if (!isTV) {
@@ -53,18 +52,11 @@ fun WeatherScreen(
                 .padding(paddingValues),
             contentAlignment = Alignment.Center
         ) {
-            if (isTV) {
-                TVWeatherContent(
-                    state = uiState,
-                    onRetry = { viewModel.loadWeatherData() }
-                )
-            } else {
-                TemperatureWidget(
-                    state = uiState,
-                    onRetry = { viewModel.loadWeatherData() },
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+            TemperatureWidget(
+                state = uiState,
+                onRetry = { viewModel.loadWeatherData() },
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }

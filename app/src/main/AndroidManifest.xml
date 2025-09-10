@@ -9,12 +9,13 @@
     <application
         android:name=".WeatherApplication"
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="${appLabel}"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherUI">
-        
+
         <!-- MainActivity is declared by each flavor's manifest -->
-        
+
     </application>
 
 </manifest>

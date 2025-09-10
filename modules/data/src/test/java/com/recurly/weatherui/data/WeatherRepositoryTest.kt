@@ -7,6 +7,10 @@ import com.recurly.weatherui.data.models.ForecastProperties
 import com.recurly.weatherui.data.models.ForecastResponse
 import com.recurly.weatherui.data.models.PointsProperties
 import com.recurly.weatherui.data.models.PointsResponse
+import com.recurly.weatherui.data.models.QuantitativeValue
+import com.recurly.weatherui.data.models.RelativeLocation
+import com.recurly.weatherui.data.models.RelativeLocationGeometry
+import com.recurly.weatherui.data.models.RelativeLocationProperties
 import com.recurly.weatherui.data.network.api.WeatherApi
 import com.recurly.weatherui.data.repository.WeatherRepository
 import com.recurly.weatherui.data.repository.WeatherRepositoryImpl
@@ -44,11 +48,25 @@ class WeatherRepositoryTest {
     @Test
     fun `getCurrentTemperature returns success with valid data`() = runTest {
         // Given
+        val mockRelativeLocation = RelativeLocation(
+            type = "Feature",
+            geometry = RelativeLocationGeometry(
+                type = "Point",
+                coordinates = listOf(-121.8434, 37.2883)
+            ),
+            properties = RelativeLocationProperties(
+                city = "San Jose",
+                state = "CA",
+                distance = QuantitativeValue(unitCode = "wmoUnit:m", value = 0.0),
+                bearing = QuantitativeValue(unitCode = "wmoUnit:degree_(angle)", value = 0.0)
+            )
+        )
         val mockPointsResponse = PointsResponse(
             properties = PointsProperties(
                 forecast = "https://api.weather.gov/forecast/1",
                 forecastHourly = "https://api.weather.gov/forecast/hourly/1",
-                forecastGridData = "https://api.weather.gov/forecast/grid/1"
+                forecastGridData = "https://api.weather.gov/forecast/grid/1",
+                relativeLocation = mockRelativeLocation
             )
         )
         val mockForecastPeriod = ForecastPeriod(
@@ -60,7 +78,8 @@ class WeatherRepositoryTest {
             windDirection = "N",
             icon = "https://api.weather.gov/icons/land/day/sunny",
             shortForecast = "Sunny",
-            detailedForecast = "Sunny with clear skies"
+            detailedForecast = "Sunny with clear skies",
+            startTime = "2025-09-10T04:20:10+00:00"
         )
         val mockForecastResponse = ForecastResponse(
             properties = ForecastProperties(
@@ -71,7 +90,15 @@ class WeatherRepositoryTest {
 
         coEvery { weatherApi.getPoints(any(), any()) } returns mockPointsResponse
         coEvery { weatherApi.getForecast(any()) } returns mockForecastResponse
-        every { mapper.mapToCurrentWeather(any()) } returns expectedTemperature
+        every {
+            mapper.mapToCurrentWeather(
+                mockForecastPeriod,
+                location = "San Jose, CA",
+                description = "Sunny",
+                latitude = 37.2883,
+                longitude = -121.8434,
+            )
+        } returns expectedTemperature
 
         // When
         val result = repository.getCurrentWeather()
@@ -82,7 +109,15 @@ class WeatherRepositoryTest {
 
         coVerify { weatherApi.getPoints(37.2883, -121.8434) }
         coVerify { weatherApi.getForecast("https://api.weather.gov/forecast/1") }
-        verify { mapper.mapToCurrentWeather(mockForecastPeriod) }
+        verify {
+            mapper.mapToCurrentWeather(
+                mockForecastPeriod,
+                location = "San Jose, CA",
+                description = "Sunny",
+                latitude = 37.2883,
+                longitude = -121.8434,
+            )
+        }
     }
 
     @Test

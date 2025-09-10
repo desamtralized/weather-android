@@ -5,10 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.recurly.weatherui.ui.screens.WeatherScreen
+import com.recurly.weatherui.ui.screens.FireTVWeatherScreen
 
 @Composable
-fun WeatherNavigation(
+fun FireTVWeatherNavigation(
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(
@@ -16,8 +16,7 @@ fun WeatherNavigation(
         startDestination = "weather"
     ) {
         composable("weather") {
-            WeatherScreen()
+            FireTVWeatherScreen()
         }
-        // we can add future routes here if needed (settings, list of places, etc)
     }
 }

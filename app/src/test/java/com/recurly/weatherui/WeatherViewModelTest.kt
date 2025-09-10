@@ -89,14 +89,22 @@ class WeatherViewModelTest {
     fun `refresh sets isRefreshing to true then false`() = runTest {
         // Given
         val temperature = CurrentWeather(72, TemperatureUnit.FAHRENHEIT, "San Jose, CA")
-        coEvery { weatherRepository.getCurrentWeather() } returns Result.success(temperature)
+        coEvery { weatherRepository.getCurrentWeather() } coAnswers {
+            // Add delay to allow observation of isRefreshing state
+            kotlinx.coroutines.delay(100)
+            Result.success(temperature)
+        }
         viewModel = WeatherViewModel(weatherRepository)
         advanceUntilIdle()
 
         // When
         viewModel.refresh()
+        
+        // Advance just enough to start the coroutine but not complete it
+        testDispatcher.scheduler.advanceTimeBy(50)
+        testDispatcher.scheduler.runCurrent()
 
-        // Then - isRefreshing should be true initially
+        // Then - isRefreshing should be true while operation is in progress
         assertTrue(viewModel.isRefreshing.value)
 
         // When processing completes
