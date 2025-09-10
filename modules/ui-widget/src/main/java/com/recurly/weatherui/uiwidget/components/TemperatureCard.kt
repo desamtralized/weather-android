@@ -2,11 +2,24 @@ package com.recurly.weatherui.uiwidget.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Thermostat
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +51,7 @@ fun PhonePortraitTemperatureCard(
 ) {
     val isDarkTheme = isSystemInDarkTheme()
     val isNightTime = WeatherParser.isNightTime(state.startTime)
-    
+
     val mapUrl = MapboxUtils.generateStaticMapUrl(
         latitude = state.latitude,
         longitude = state.longitude,
@@ -48,7 +61,7 @@ fun PhonePortraitTemperatureCard(
         isDarkMode = isDarkTheme,
         isNightTime = isNightTime
     )
-    
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -65,7 +78,7 @@ fun PhonePortraitTemperatureCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.matchParentSize()
             )
-            
+
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -78,7 +91,7 @@ fun PhonePortraitTemperatureCard(
                         )
                     )
             )
-            
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -90,7 +103,10 @@ fun PhonePortraitTemperatureCard(
                     contentAlignment = Alignment.Center
                 ) {
                     WeatherAnimation(
-                        weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                        weatherType = WeatherParser.parseWeather(
+                            state.description,
+                            state.startTime
+                        ),
                         size = 100.dp
                     )
                     AnimatedTemperatureText(
@@ -105,14 +121,13 @@ fun PhonePortraitTemperatureCard(
                         .padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
                     Text(
                         text = state.location,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.25f),
-                                offset = Offset(1f, 1f),
-                                blurRadius = 2f
+                                color = Color.Black.copy(alpha = 0.5f),
+                                offset = Offset(2f, 2f),
+                                blurRadius = 4f
                             )
                         ),
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -159,17 +174,17 @@ fun PhoneLandscapeTemperatureCard(
 ) {
     val isDarkTheme = isSystemInDarkTheme()
     val isNightTime = WeatherParser.isNightTime(state.startTime)
-    
+
     val mapUrl = MapboxUtils.generateStaticMapUrl(
         latitude = state.latitude,
         longitude = state.longitude,
         width = 600,
         height = 200,
-        zoom = 11,
+        zoom = 15,
         isDarkMode = isDarkTheme,
         isNightTime = isNightTime
     )
-    
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -186,7 +201,7 @@ fun PhoneLandscapeTemperatureCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.matchParentSize()
             )
-            
+
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -200,7 +215,7 @@ fun PhoneLandscapeTemperatureCard(
                         )
                     )
             )
-            
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -239,7 +254,10 @@ fun PhoneLandscapeTemperatureCard(
                         contentAlignment = Alignment.Center
                     ) {
                         WeatherAnimation(
-                            weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                            weatherType = WeatherParser.parseWeather(
+                                state.description,
+                                state.startTime
+                            ),
                             size = 100.dp
                         )
                         AnimatedTemperatureText(
@@ -284,7 +302,7 @@ fun PhoneLandscapeTemperatureCard(
 
 /**
  * Tablet portrait layout for temperature display.
- * Enhanced layout with weather animations and larger typography.
+ * Enhanced layout with larger typography.
  * @param state Success state containing weather data
  * @param modifier Optional modifier for customization
  */
@@ -295,7 +313,7 @@ fun TabletPortraitTemperatureCard(
 ) {
     val isDarkTheme = isSystemInDarkTheme()
     val isNightTime = WeatherParser.isNightTime(state.startTime)
-    
+
     val mapUrl = MapboxUtils.generateStaticMapUrl(
         latitude = state.latitude,
         longitude = state.longitude,
@@ -305,7 +323,7 @@ fun TabletPortraitTemperatureCard(
         isDarkMode = isDarkTheme,
         isNightTime = isNightTime
     )
-    
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -322,7 +340,7 @@ fun TabletPortraitTemperatureCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.matchParentSize()
             )
-            
+
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -335,7 +353,7 @@ fun TabletPortraitTemperatureCard(
                         )
                     )
             )
-            
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -346,7 +364,10 @@ fun TabletPortraitTemperatureCard(
                     contentAlignment = Alignment.Center
                 ) {
                     WeatherAnimation(
-                        weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                        weatherType = WeatherParser.parseWeather(
+                            state.description,
+                            state.startTime
+                        ),
                         size = 200.dp
                     )
                     AnimatedTemperatureText(
@@ -413,7 +434,7 @@ fun TabletLandscapeTemperatureCard(
 ) {
     val isDarkTheme = isSystemInDarkTheme()
     val isNightTime = WeatherParser.isNightTime(state.startTime)
-    
+
     val mapUrl = MapboxUtils.generateStaticMapUrl(
         latitude = state.latitude,
         longitude = state.longitude,
@@ -423,7 +444,7 @@ fun TabletLandscapeTemperatureCard(
         isDarkMode = isDarkTheme,
         isNightTime = isNightTime
     )
-    
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -440,7 +461,7 @@ fun TabletLandscapeTemperatureCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.matchParentSize()
             )
-            
+
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -454,7 +475,7 @@ fun TabletLandscapeTemperatureCard(
                         )
                     )
             )
-            
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -493,26 +514,16 @@ fun TabletLandscapeTemperatureCard(
                         contentAlignment = Alignment.Center
                     ) {
                         WeatherAnimation(
-                            weatherType = WeatherParser.parseWeather(state.description, state.startTime),
+                            weatherType = WeatherParser.parseWeather(
+                                state.description,
+                                state.startTime
+                            ),
                             size = 180.dp
                         )
                         AnimatedTemperatureText(
                             temperature = state.temperature,
                             unit = state.unit,
                             textSize = 96.sp
-                        )
-                    }
-                    state.description?.let {
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                shadow = Shadow(
-                                    color = Color.Black.copy(alpha = 0.25f),
-                                    offset = Offset(1f, 1f),
-                                    blurRadius = 2f
-                                )
-                            ),
-                            modifier = Modifier.padding(top = 8.dp)
                         )
                     }
                 }
@@ -529,6 +540,19 @@ fun TabletLandscapeTemperatureCard(
                         text = state.lastUpdated,
                         style = MaterialTheme.typography.bodyMedium
                     )
+                    state.description?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                shadow = Shadow(
+                                    color = Color.Black.copy(alpha = 0.25f),
+                                    offset = Offset(1f, 1f),
+                                    blurRadius = 2f
+                                )
+                            ),
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    }
                 }
             }
         }

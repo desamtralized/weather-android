@@ -72,9 +72,9 @@ fun AnimatedTemperatureText(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
                 shadow = Shadow(
-                    color = Color.Black.copy(alpha = 0.3f),
-                    offset = Offset(2f, 2f),
-                    blurRadius = 4f
+                    color = Color.Black.copy(alpha = 0.75f),
+                    offset = Offset(4f, 4f),
+                    blurRadius = 8f
                 )
             )
         )
