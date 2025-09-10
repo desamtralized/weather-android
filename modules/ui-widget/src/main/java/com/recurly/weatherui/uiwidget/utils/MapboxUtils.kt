@@ -2,9 +2,10 @@ package com.recurly.weatherui.uiwidget.utils
 
 /** Utility for generating Mapbox static map URLs */
 object MapboxUtils {
+    // mapbox publishable key, in prod env we could implement temp keys rotation with a backend if needed.
     private const val MAPBOX_API_KEY = "pk.eyJ1Ijoic2FtYmFyYm96YSIsImEiOiJjaXF5ZmJoMjQwMXM1ZnVtZ2NvdWFueXFwIn0.lH4JQ6MffArH4f5DJITvaA"
     private const val BASE_URL = "https://api.mapbox.com/styles/v1"
-    
+
     /** Available map rendering styles */
     enum class MapStyle(val styleId: String) {
         DAY("mapbox/navigation-day-v1"),
@@ -36,7 +37,7 @@ object MapboxUtils {
             isNightTime -> MapStyle.NIGHT
             else -> MapStyle.DAY
         }
-        
+
         return buildString {
             append(BASE_URL)
             append("/${style.styleId}/static/")
